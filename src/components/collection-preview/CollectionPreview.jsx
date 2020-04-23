@@ -7,7 +7,7 @@ const CollectionPreview = (props) => {
   //limits the array to 4 peices of inventory
   const newArr = props.items.slice(0, 4);
 
-  console.log(newArr);
+  // console.log(newArr);
   return (
     <div className="collection-preview">
       <h1 className="title">{props.title.toUpperCase()}</h1>
