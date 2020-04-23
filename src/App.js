@@ -2,8 +2,9 @@ import React from "react";
 import { Route, Link } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/homepage/HomePageComponent.jsx";
-import ShopPage from "./pages/shop/ShopComponent.jsx";
+import ShopPage from "./pages/shoppage/ShopComponent.jsx";
 import Header from "./components/header/HeaderComponent.jsx";
+import SignInUp from "./pages/signinuppage/SignInUp.jsx";
 
 const Hats = () => (
   <div>
@@ -18,6 +19,7 @@ function App() {
       <Route exact path="/" component={HomePage} />
       <Route exact path="/shop/hats" component={Hats} />
       <Route exact path="/shop" component={ShopPage} />
+      <Route exact path="/signin" component={SignInUp} />
     </div>
   );
 }
