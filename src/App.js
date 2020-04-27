@@ -5,7 +5,7 @@ import HomePage from "./pages/homepage/HomePageComponent.jsx";
 import ShopPage from "./pages/shoppage/ShopComponent.jsx";
 import Header from "./components/header/HeaderComponent.jsx";
 import SignInUp from "./pages/signinuppage/SignInUp.jsx";
-import { auth } from "./firebase/firebase.utils.js";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils.js";
 
 const Hats = () => (
   <div>
@@ -19,15 +19,27 @@ function App() {
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
-    const unsubsribeFromAuth = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      user ? console.log("signed in") : console.log("signed out");
-      console.log(user);
+    const unsubsribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      userAuth ? console.log("signed in") : console.log("signed out");
+
+      //if signed in
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        console.log(userAuth);
+
+        userRef.onSnapshot((e) => {
+          setCurrentUser({ id: e.id, ...e.data() });
+        });
+      }
     });
 
     //unmount equivalent
     return () => unsubsribeFromAuth();
   }, []);
+
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
 
   return (
     <div>
