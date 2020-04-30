@@ -5,7 +5,7 @@ import "./CustomButtonComponent.scss";
 const CustomButton = (props) => (
   <button
     className={`${props.googleBtn ? "google-sign-in" : ""} custom-button`}
-    onClick={props.test}
+    onClick={props.method}
     type={props.type}
   >
     {props.children}

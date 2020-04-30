@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SignInComponent.scss";
 import FormInput from "../form-input/FormInputComponent.jsx";
 import CustomButton from "../custom-button/CustomButtonComponent.jsx";
-import { SignInWithGoogle } from "../../firebase/firebase.utils.js";
+import { auth, SignInWithGoogle } from "../../firebase/firebase.utils.js";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [validLogIn, setValidLogin] = useState(true);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+    } catch (err) {
+      setValidLogin(false);
+      console.log("error occured when signing in");
+    }
+
     setEmail("");
     setPassword("");
   };
@@ -22,6 +31,11 @@ const SignIn = () => {
     <div className="sign-in">
       <h2 className="haveanaccount">I already have an account</h2>
       <span>Sign in with your email and password</span>
+      {validLogIn ? null : (
+        <p className="errorMessage">
+          Email or Password did not match, please try again
+        </p>
+      )}
 
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -40,9 +54,10 @@ const SignIn = () => {
           label="password"
           handleChange={(e) => setPassword(e.target.value)}
         />
+
         <div className="buttons">
           <CustomButton type="submit">Sign In</CustomButton>
-          <CustomButton googleBtn test={SignInWithGoogle}>
+          <CustomButton type="button" googleBtn method={SignInWithGoogle}>
             Google Auth
           </CustomButton>
         </div>

@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./HeaderComponent.scss";
 import { ReactComponent as Logo } from "../../assets/original.svg";
 import { auth } from "../../firebase/firebase.utils.js";
+//Redux
+
+import "./HeaderComponent.scss";
 
 const Header = (props) => {
   return (

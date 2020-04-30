@@ -52,4 +52,6 @@ function App() {
   );
 }
 
+//dispatch: whatever object you pass to it, it will pass to every reducer
+
 export default App;
