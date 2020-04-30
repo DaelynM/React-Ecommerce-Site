@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ReactComponent as Logo } from "../../assets/original.svg";
+import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils.js";
+import CartIcon from "../cart-icon/CartIconComponent.jsx";
+import CartDropDown from "../cart-dropdown/CartDropDownComponent.jsx";
 //Redux
 import { useSelector } from "react-redux";
 
@@ -9,6 +11,7 @@ import "./HeaderComponent.scss";
 
 const Header = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
+  const cartHidden = useSelector((state) => state.cart.hidden);
   console.log("test", currentUser);
   if (currentUser) {
     console.log("t");
@@ -36,7 +39,9 @@ const Header = () => {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      {cartHidden ? null : <CartDropDown />}
     </div>
   );
 };
