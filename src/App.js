@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, Redirect } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/homepage/HomePageComponent.jsx";
 import ShopPage from "./pages/shoppage/ShopComponent.jsx";
@@ -8,18 +8,15 @@ import SignInUp from "./pages/signinuppage/SignInUp.jsx";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils.js";
 
 //redux
-import { useDispatch } from "react-redux";
-
-const Hats = () => (
-  <div>
-    <p>hats</p>
-  </div>
-);
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
-  //firebase stuff
+  //redux stuff
   const dispatch = useDispatch();
-  const [currentUser, setCurrentUser] = useState(null);
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+  //firebase stuff
+  // const [currentUser, setCurrentUser] = useState(null);
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
@@ -50,16 +47,20 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log(currentUser);
+    console.log("cu", currentUser);
   }, [currentUser]);
 
   return (
     <div>
       <Header />
       <Route exact path="/" component={HomePage} />
-      <Route exact path="/shop/hats" component={Hats} />
-      <Route exact path="/shop" component={ShopPage} />
-      <Route exact path="/signin" component={SignInUp} />
+      <Route path="/shop" component={ShopPage} />
+      <Route
+        exact
+        path="/signin"
+        render={() => (currentUser ? <Redirect to="/" /> : <SignInUp />)}
+        // component={SignInUp}
+      />
     </div>
   );
 }

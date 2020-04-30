@@ -8,8 +8,13 @@ import { useSelector } from "react-redux";
 import "./HeaderComponent.scss";
 
 const Header = () => {
-  const currentUser = useSelector((state) => state.user);
+  const currentUser = useSelector((state) => state.user.currentUser);
   console.log("test", currentUser);
+  if (currentUser) {
+    console.log("t");
+  } else {
+    console.log("f");
+  }
   return (
     <div className="header">
       <Link className="logo-container" to="/">
