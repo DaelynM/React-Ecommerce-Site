@@ -7,6 +7,9 @@ import Header from "./components/header/HeaderComponent.jsx";
 import SignInUp from "./pages/signinuppage/SignInUp.jsx";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils.js";
 
+//redux
+import { useDispatch } from "react-redux";
+
 const Hats = () => (
   <div>
     <p>hats</p>
@@ -15,6 +18,7 @@ const Hats = () => (
 
 function App() {
   //firebase stuff
+  const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState(null);
 
   // Similar to componentDidMount and componentDidUpdate:
@@ -25,11 +29,19 @@ function App() {
       //if signed in
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
-        console.log(userAuth);
+        console.log("userAuth", userAuth);
 
         userRef.onSnapshot((e) => {
-          setCurrentUser({ id: e.id, ...e.data() });
+          dispatch({
+            type: "SET_CURRENT_USER",
+            payload: {
+              id: e.id,
+              ...e.data(),
+            },
+          });
         });
+      } else {
+        dispatch({ type: "SET_CURRENT_USER", payload: userAuth });
       }
     });
 
@@ -43,7 +55,7 @@ function App() {
 
   return (
     <div>
-      <Header currentUser={currentUser} />
+      <Header />
       <Route exact path="/" component={HomePage} />
       <Route exact path="/shop/hats" component={Hats} />
       <Route exact path="/shop" component={ShopPage} />
