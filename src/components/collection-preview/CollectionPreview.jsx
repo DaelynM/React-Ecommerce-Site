@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./CollectionPreview.scss";
 import CollectionItem from "../collection-item/CollectionItem.jsx";
 
@@ -15,6 +14,7 @@ const CollectionPreview = (props) => {
         {newArr.map((e) => (
           <CollectionItem
             key={e.id}
+            item={e}
             name={e.name}
             price={e.price}
             imageUrl={e.imageUrl}

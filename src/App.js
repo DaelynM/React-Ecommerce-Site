@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Link, Redirect } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/homepage/HomePageComponent.jsx";
 import ShopPage from "./pages/shoppage/ShopComponent.jsx";
