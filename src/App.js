@@ -9,6 +9,7 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils.js";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
+import CheckoutPage from "./pages/checkoutpage/CheckoutPage";
 
 function App() {
   //redux stuff
@@ -55,6 +56,7 @@ function App() {
       <Header />
       <Route exact path="/" component={HomePage} />
       <Route path="/shop" component={ShopPage} />
+      <Route exact path="/checkout" component={CheckoutPage} />
       <Route
         exact
         path="/signin"

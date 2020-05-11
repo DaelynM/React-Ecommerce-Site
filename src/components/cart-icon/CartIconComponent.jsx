@@ -7,6 +7,8 @@ const CartIcon = () => {
   const test = useSelector((state) => state.cart.hidden);
   console.log("cart", test);
 
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
   const dispatch = useDispatch();
 
   const toggleCart = () => {
@@ -15,10 +17,12 @@ const CartIcon = () => {
     });
   };
 
+  const count = cartItems.reduce((acumilator, e) => acumilator + e.quantity, 0);
+
   return (
     <div className="cart-icon" onClick={toggleCart}>
       <ShoppingIcon className="shopping-icon" />
-      <span className="item-count">0</span>
+      <span className="item-count">{count}</span>
     </div>
   );
 };
