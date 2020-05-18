@@ -13,7 +13,7 @@ const CartDropDown = ({ history }) => {
   console.log("cartItems", cartItems);
 
   const goToCheckout = () => {
-    history.push("checkout");
+    history.push("shop/checkout");
     dispatch({
       type: "TOGGLE_CART_DROPDOWN",
     });

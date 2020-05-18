@@ -7,6 +7,10 @@ import { useSelector, useDispatch } from "react-redux";
 const CollectionItem = (props) => {
   const test = useSelector((state) => state.cart.cartItems);
 
+  console.log("testTitle", props.item);
+
+  const { imageUrl, price, name } = props.item;
+
   const dispatch = useDispatch();
 
   const addItem = () => {
@@ -14,18 +18,15 @@ const CollectionItem = (props) => {
       type: "ADD_ITEM",
       payload: props.item,
     });
-    console.log(test);
+    console.log("test adding", test);
   };
 
   return (
     <div className="collection-item">
-      <div
-        className="image"
-        style={{ backgroundImage: `url(${props.imageUrl})` }}
-      />
+      <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
       <div className="collection-footer">
-        <span className="name">{props.name}</span>
-        <span className="price">{props.price}</span>
+        <span className="name">{name}</span>
+        <span className="price">{price}</span>
       </div>
       <CustomButton method={addItem} inverted>
         Add to cart
