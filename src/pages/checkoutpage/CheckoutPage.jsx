@@ -1,12 +1,12 @@
 import React from "react";
 import "./CheckoutPage.scss";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import CheckoutItem from "../../components/checkout-item/CheckoutItem";
 import StripeButton from "../../components/stripe-button/StripeButton";
 
 const CheckoutPage = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const count = cartItems.reduce((acumilator, e) => acumilator + e.quantity, 0);
+  // const count = cartItems.reduce((acumilator, e) => acumilator + e.quantity, 0);
   const price = cartItems.reduce((acumilator, e) => acumilator + e.price, 0);
   console.log("cartItems", cartItems);
 

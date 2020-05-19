@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/homepage/HomePageComponent.jsx";
@@ -45,7 +45,7 @@ function App() {
 
     //unmount equivalent
     return () => unsubsribeFromAuth();
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     console.log("cu", currentUser);

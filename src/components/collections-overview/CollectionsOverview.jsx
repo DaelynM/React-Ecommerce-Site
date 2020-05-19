@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const CollectionsOverview = () => {
   const collections = useSelector((state) => state.shop.collections);
-  const collectionsObjToKeys = () => {};
 
   console.log("collecionsOverview", collections);
 

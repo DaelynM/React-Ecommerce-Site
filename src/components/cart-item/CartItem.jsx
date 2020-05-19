@@ -1,7 +1,6 @@
 import React from "react";
 
 import "./CartItem.scss";
-import { useSelector } from "react-redux";
 
 const CartItem = (props) => {
   console.log("props", props);
